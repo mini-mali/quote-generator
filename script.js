@@ -6,14 +6,14 @@ const newQuoteBtn = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
 
 
-// Show loading
-function loading() {
+
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-// Hide loading
-function complete() {
+
+function removeLoadingSpinnner() {
     if (!loader.hidden) {
         quoteContainer.hidden = false;
         loader.hidden = true;
@@ -24,24 +24,12 @@ function complete() {
 
 // Get quote from API
 async function getQuote() {
-    loading();
-    //const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    //const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en';
+    showLoadingSpinner();
     const apiUrl = 'https://api.chucknorris.io/jokes/random';
 
     try {
-        //const response = await fetch(proxyUrl + apiUrl);
         const response = await fetch(apiUrl);
         const data = await response.json();
-        //console.log(data);
-        //authorText.innerText = data.quoteAuthor;
-
-        // Chuck Norris API doesn't have quoteAuthor key
-        if (data.quoteAuthor === undefined) {
-            authorText.innerText = 'Chuck Norris';
-        } else {
-            authorText.innerText = data.quoteAuthor;
-        }
 
         // Reduce font size for long quotes
         if (data.value.length > 50) {
@@ -50,11 +38,10 @@ async function getQuote() {
             quoteText.classList.remove('long-quote');
         }
         quoteText.innerText = data.value;
+        authorText.innerText = 'Chuck Norris';
 
-        // Stop loader, Show quote
-        complete();
+        removeLoadingSpinnner();
     } catch (error) {
-        //getQuote();
         console.log('whoops, no quote', error);
     }
 }
