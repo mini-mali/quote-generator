@@ -20,7 +20,20 @@ async function getQuote() {
         const data = await response.json();
         //console.log(data);
         //authorText.innerText = data.quoteAuthor;
-        authorText.innerText = 'Chuck Norris';
+
+        // Chuck Norris API doesn't have quoteAuthor key
+        if (data.quoteAuthor === undefined) {
+            authorText.innerText = 'Chuck Norris';
+        } else {
+            authorText.innerText = data.quoteAuthor;
+        }
+
+        // Reduce font size for long quotes
+        if (data.value.length > 50) {
+            quoteText.classList.add('long-quote');
+        } else {
+            quoteText.classList.remove('long-quote');
+        }
         quoteText.innerText = data.value;
     } catch (error) {
         //getQuote();

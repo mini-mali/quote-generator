@@ -37,7 +37,9 @@ body {
 }
 
 .long-quote {
+  display: inline-block;
   font-size: 2rem;
+  line-height: 1.4;
 }
 
 .fa-quote-left {
