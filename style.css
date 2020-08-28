@@ -92,6 +92,24 @@ button:active {
 }
 
 
+
+
+/* Loader */
+.loader {
+  border: 8px solid transparent; /* Light grey */
+  border-top: 8px solid darkgrey; /* Blue */
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 @media screen and (max-width: 1000px) {
   .quote-container {
     margin: auto 10px;
